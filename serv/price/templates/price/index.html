@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Price</title>
+</head>
+<body>
+<h2>Price</h2>
+<div>
+    <form action="/" method="post">
+        <label for="val">Значение:</label><br>
+        <input type="text" id="val" name="val"><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+val = {{ val }}
+<br>
+<br>
+<br>
+<br>
+<form action="/" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="file">Price file:</label>
+        <input type="file" id="price_file" name="price_file">
+    </div>
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+</form>
+</body>
+</html>

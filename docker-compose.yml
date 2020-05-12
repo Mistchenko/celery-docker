@@ -1,0 +1,58 @@
+version: "3.7"
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./Dockerfile_Django
+    
+    container_name: '${PROJECT_NAME}_django'
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+     - ./${PROJECT_NAME}:/app
+    ports:
+     - "8000:8000"
+    
+  redis:
+    image: redis
+#    restart: always
+    container_name: '${PROJECT_NAME}_redis'
+    command: redis-server
+    ports:
+      - '6379:6379'
+
+  celery:
+    build:
+      context: .
+      dockerfile: ./Dockerfile_Django
+    
+    container_name: '${PROJECT_NAME}_celery'
+    command: celery -A ${PROJECT_NAME} worker -l info
+
+    volumes:
+      - ./serv:/app
+
+    links:
+      - redis
+
+    depends_on:
+      - redis
+
+    environment:
+      - DEBUG=1
+#        - SECRET_KEY=dbaa1_i7%*3r9-=z-+_mz4r-!qeed@(-a_r(g@k8jo8y3r27%m
+#        - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+
+
+
+#    celery-beat:
+#      build: ./project
+#      command: celery -A core beat -l info
+#      volumes:
+#        - ./project/:/usr/src/app/
+#      environment:
+#        - DEBUG=1
+#        - SECRET_KEY=dbaa1_i7%*3r9-=z-+_mz4r-!qeed@(-a_r(g@k8jo8y3r27%m
+#        - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+#      depends_on:
+#        - redis
