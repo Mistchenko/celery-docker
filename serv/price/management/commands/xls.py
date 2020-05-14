@@ -7,9 +7,5 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         print(self.help)
-        parser_xlsx({
-            'id': 3,
-            'sn': 0,
-            'name': 1,
-            'price': 3,
-        })
+        #print(parser_xlsx({'id': 2}))
+        print(parser_xlsx({'id': 3}))

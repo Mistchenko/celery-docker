@@ -1,7 +1,7 @@
 # celery-docker
 Docker Django + Celery + Redis; xlrd
 
-## Создать (пересобрать) конткйнер
+## Создать (пересобрать) контейнер
 
 `docker-compose build`
 
